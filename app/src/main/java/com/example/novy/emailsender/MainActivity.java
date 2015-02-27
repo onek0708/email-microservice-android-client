@@ -2,59 +2,60 @@ package com.example.novy.emailsender;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.novy.emailsender.infrastructure.di.Dagger_MainComponent;
+import com.example.novy.emailsender.infrastructure.di.MainComponent;
+import com.example.novy.emailsender.infrastructure.di.MainModule;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
+import javax.inject.Inject;
 
-public class MainActivity extends ActionBarActivity {
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+
+public class MainActivity extends FragmentActivity {
+
+    private MainComponent component;
+
+    @Inject
+    EmailValidator emailValidator;
+
+    @InjectView(R.id.emailField)
+    EditText emailField;
+
+    @InjectView(R.id.passwordField)
+    EditText passwordField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        ButterKnife.inject(this);
+        component = ((EmailSenderApplication) getApplication()).component();
+        component.inject(this);
     }
 
     public void login(View view) {
-        final EditText emailField = (EditText) findViewById(R.id.emailField);
-        final EditText passwordField = (EditText) findViewById(R.id.passwordField);
-
         final String emailString = emailField.getText().toString();
         final String passwordString = passwordField.getText().toString();
 
-        if (emailIsValid(emailString) && passwordNotEmpty(passwordString)) {
-            showEmailContentActivity(emailString, passwordString);
+        if (emailHasInvalidFormat(emailString)) {
+            showErrorDialog("Wrong email format!");
+        } else if (passwordIsEmpty(passwordString)) {
+            showErrorDialog("Empty password!");
         } else {
-            showErrorDialog();
+            showEmailContentActivity(emailString, passwordString);
         }
+    }
+
+    private boolean emailHasInvalidFormat(String emailString) {
+        return !emailValidator.isValid(emailString);
     }
 
     private void showEmailContentActivity(String emailString, String passwordString) {
@@ -70,23 +71,18 @@ public class MainActivity extends ActionBarActivity {
         finish();
     }
 
-    private boolean passwordNotEmpty(String passwordString) {
-        return !passwordString.isEmpty();
+    private boolean passwordIsEmpty(String passwordString) {
+        return passwordString.isEmpty();
     }
 
-    private void showErrorDialog() {
+    private void showErrorDialog(String dialogMessage) {
         AlertDialog.Builder dialogAlert = new AlertDialog.Builder(this);
 
-        dialogAlert.setMessage("Wrong email format!");
+        dialogAlert.setMessage(dialogMessage);
         dialogAlert.setTitle("Error");
 
         dialogAlert.setPositiveButton("OK", null);
         dialogAlert.setCancelable(true);
         dialogAlert.create().show();
-    }
-
-    private boolean emailIsValid(String emailString) {
-        final EmailValidator emailValidator = EmailValidator.getInstance();
-        return emailValidator.isValid(emailString);
     }
 }

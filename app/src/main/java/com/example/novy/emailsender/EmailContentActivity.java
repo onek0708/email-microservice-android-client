@@ -18,8 +18,6 @@ public class EmailContentActivity extends ActionBarActivity {
         Bundle parameterBundle = getIntent().getExtras();
         senderEmail = String.valueOf(parameterBundle.get(IntentConstants.SENDER_EMAIL_STRING));
         senderPassword = String.valueOf(parameterBundle.get(IntentConstants.SENDER_PASSWORD_STRING));
-
-        System.out.println(senderEmail + " " + senderPassword);
     }
 
     @Override
