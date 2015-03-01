@@ -10,9 +10,10 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailField"
+        android:padding="@dimen/abc_action_bar_default_padding_material"
+        android:layout_above="@+id/passwordField"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
-        android:padding="@dimen/abc_action_bar_default_padding_material" />
+        android:layout_marginBottom="75dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -20,17 +21,47 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passwordField"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/emailField" />
+        android:layout_above="@+id/continueButton"
+        android:layout_alignStart="@+id/emailField"
+        android:layout_marginBottom="65dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Continue"
         android:id="@+id/continueButton"
-        android:layout_below="@+id/passwordField"
+        android:onClick="login"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
-        android:onClick="login" />
+        android:layout_marginBottom="83dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Please type sender&apos;s email address and password:"
+        android:id="@+id/infoText"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="48dp"
+        android:layout_alignStart="@+id/emailField"
+        android:layout_alignEnd="@+id/emailField" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Email:"
+        android:id="@+id/senderAddressLabel"
+        android:layout_above="@+id/emailField"
+        android:layout_alignStart="@+id/emailField" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Password:"
+        android:id="@+id/textView"
+        android:layout_above="@+id/passwordField"
+        android:layout_alignStart="@+id/passwordField" />
 
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.novy.emailsender.infrastructure.di.Dagger_MainComponent;
 import com.example.novy.emailsender.infrastructure.di.MainComponent;
+import com.example.novy.emailsender.infrastructure.di.MainModule;
 
 import dagger.Component;
 
@@ -19,7 +20,9 @@ public class EmailSenderApplication extends Application {
         super.onCreate();
 
         component = Dagger_MainComponent
-                .create();
+                .builder()
+                .mainModule(new MainModule(this))
+                .build();
 
         component.inject(this);
     }

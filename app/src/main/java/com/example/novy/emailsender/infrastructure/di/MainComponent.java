@@ -1,5 +1,6 @@
 package com.example.novy.emailsender.infrastructure.di;
 
+import com.example.novy.emailsender.EmailContentActivity;
 import com.example.novy.emailsender.EmailSenderApplication;
 import com.example.novy.emailsender.MainActivity;
 
@@ -19,4 +20,5 @@ public interface MainComponent {
 
     void inject(EmailSenderApplication application);
     void inject(MainActivity activity);
+    void inject(EmailContentActivity activity);
 }

@@ -8,9 +8,77 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.novy.emailsender.EmailContentActivity">
 
-    <TextView
-        android:text="@string/hello_world"
+    <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/recipientEmailField"
+        android:layout_below="@+id/participantAddressCaption"
+        android:layout_alignStart="@+id/subjectCaption" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/contentField"
+        android:layout_above="@+id/sendButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topicField"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/subjectCaption" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send!"
+        android:id="@+id/sendButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Please type recipient address, subject and message content:"
+        android:id="@+id/infoText"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/recipientEmailField"
+        android:layout_alignEnd="@+id/recipientEmailField" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Participant:"
+        android:id="@+id/participantAddressCaption"
+        android:layout_below="@+id/infoText"
+        android:layout_alignStart="@+id/infoText"
+        android:layout_marginTop="45dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Subject:"
+        android:id="@+id/subjectCaption"
+        android:layout_below="@+id/recipientEmailField"
+        android:layout_alignStart="@+id/contentField"
+        android:layout_marginTop="37dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Content:"
+        android:id="@+id/contentLabel"
+        android:layout_above="@+id/contentField"
+        android:layout_alignStart="@+id/contentField" />
 
 </RelativeLayout>

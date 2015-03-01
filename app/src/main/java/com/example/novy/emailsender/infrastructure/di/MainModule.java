@@ -1,8 +1,11 @@
 package com.example.novy.emailsender.infrastructure.di;
 
-import org.apache.commons.validator.routines.EmailValidator;
+import android.app.Application;
 
-import javax.inject.Singleton;
+import com.example.novy.emailsender.EmailServiceApiGateway;
+import com.loopj.android.http.AsyncHttpClient;
+
+import org.apache.commons.validator.routines.EmailValidator;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,8 +17,29 @@ import dagger.Provides;
 @Module
 public class MainModule {
 
+    private Application context;
+
+    public MainModule(Application context) {
+        this.context = context;
+    }
+
     @Provides
-    public EmailValidator providesEmailValidator() {
+    public Application provideApplicationContext() {
+        return context;
+    }
+
+    @Provides
+    public AsyncHttpClient provideAsyncHttpClient() {
+        return new AsyncHttpClient();
+    }
+
+    @Provides
+    public EmailValidator provideEmailValidator() {
         return EmailValidator.getInstance();
+    }
+
+    @Provides
+    public EmailServiceApiGateway provideEmailServiceApiGateway(Application context, AsyncHttpClient httpClient) {
+        return new EmailServiceApiGateway(context, httpClient);
     }
 }

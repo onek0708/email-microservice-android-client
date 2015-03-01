@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends BaseActivity {
 
     private MainComponent component;
 
@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        component = ((EmailSenderApplication) getApplication()).component();
+        component = getEmailSenderApplication().component();
         component.inject(this);
     }
 
