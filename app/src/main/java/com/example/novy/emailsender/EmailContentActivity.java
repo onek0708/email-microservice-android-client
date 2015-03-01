@@ -1,6 +1,5 @@
 package com.example.novy.emailsender;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,8 +23,8 @@ public class EmailContentActivity extends BaseActivity {
     @InjectView(R.id.recipientEmailField)
     EditText recipientField;
 
-    @InjectView(R.id.topicField)
-    EditText topicField;
+    @InjectView(R.id.subjectField)
+    EditText subjectField;
 
     @InjectView(R.id.contentField)
     EditText contentField;
@@ -71,7 +70,7 @@ public class EmailContentActivity extends BaseActivity {
     @OnClick(R.id.sendButton)
     public void onSendButtonClick() {
         final String recipient = recipientField.getText().toString();
-        final String subject = topicField.getText().toString();
+        final String subject = subjectField.getText().toString();
         final String content = contentField.getText().toString();
 
         sender.send(senderEmail, senderPassword, recipient, subject, content);
