@@ -14,7 +14,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class EmailContentActivity extends BaseActivity {
+public class EmailSendingActivity extends BaseActivity {
     private String senderEmail;
     private String senderPassword;
 

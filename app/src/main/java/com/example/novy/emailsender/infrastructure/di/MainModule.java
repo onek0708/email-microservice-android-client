@@ -3,6 +3,8 @@ package com.example.novy.emailsender.infrastructure.di;
 import android.app.Application;
 
 import com.example.novy.emailsender.EmailServiceApiGateway;
+import com.example.novy.emailsender.login.MainActivityPresenter;
+import com.example.novy.emailsender.login.MainActivityPresenterImpl;
 import com.loopj.android.http.AsyncHttpClient;
 
 import org.apache.commons.validator.routines.EmailValidator;
@@ -41,5 +43,10 @@ public class MainModule {
     @Provides
     public EmailServiceApiGateway provideEmailServiceApiGateway(Application context, AsyncHttpClient httpClient) {
         return new EmailServiceApiGateway(context, httpClient);
+    }
+
+    @Provides
+    public MainActivityPresenter provideMainActivityPresenter(EmailValidator validator) {
+        return new MainActivityPresenterImpl(validator);
     }
 }

@@ -1,10 +1,8 @@
 package com.example.novy.emailsender.infrastructure.di;
 
-import com.example.novy.emailsender.EmailContentActivity;
+import com.example.novy.emailsender.EmailSendingActivity;
 import com.example.novy.emailsender.EmailSenderApplication;
-import com.example.novy.emailsender.MainActivity;
-
-import org.apache.commons.validator.routines.EmailValidator;
+import com.example.novy.emailsender.login.MainActivity;
 
 import javax.inject.Singleton;
 
@@ -20,5 +18,5 @@ public interface MainComponent {
 
     void inject(EmailSenderApplication application);
     void inject(MainActivity activity);
-    void inject(EmailContentActivity activity);
+    void inject(EmailSendingActivity activity);
 }
