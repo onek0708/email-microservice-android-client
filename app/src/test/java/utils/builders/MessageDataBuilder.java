@@ -19,7 +19,7 @@ public class MessageDataBuilder {
 
     private String sender = "sender@gmail.com";
     private String password = "password";
-    private Collection<String> recipients = ImmutableList.of("sender@gmail.com");
+    private Collection<String> recipients = ImmutableList.of("recipient@gmail.com");
     private String subject = "subject";
     private String content = "content";
 

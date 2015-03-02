@@ -1,5 +1,6 @@
 package com.example.novy.emailsender.login;
 
+import com.example.novy.emailsender.ErrorMessageHolder;
 import com.google.common.base.Strings;
 
 import org.apache.commons.validator.routines.EmailValidator;
@@ -24,9 +25,9 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
     @Override
     public void handle(String senderEmail, String senderEmailPassword) {
         if (!emailValid(senderEmail)) {
-            activity.showErrorMessage("Invalid email format!");
+            activity.showErrorMessage(ErrorMessageHolder.INVALID_SENDER_ADDRESS);
         } else if (passwordEmpty(senderEmailPassword)) {
-            activity.showErrorMessage("Empty password!");
+            activity.showErrorMessage(ErrorMessageHolder.EMPTY_PASSWORD);
         } else {
             activity.showEmailContentActivity(senderEmail, senderEmailPassword);
         }

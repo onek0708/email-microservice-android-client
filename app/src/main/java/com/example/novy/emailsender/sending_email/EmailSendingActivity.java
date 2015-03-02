@@ -9,6 +9,7 @@ import com.example.novy.emailsender.BaseActivity;
 import com.example.novy.emailsender.IntentConstants;
 import com.example.novy.emailsender.R;
 import com.example.novy.emailsender.infrastructure.di.MainComponent;
+import com.google.common.collect.ImmutableList;
 
 import javax.inject.Inject;
 
@@ -33,7 +34,7 @@ public class EmailSendingActivity extends BaseActivity {
     EditText contentField;
 
     @Inject
-    EmailServiceApiGateway sender;
+    EmailSendingActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class EmailSendingActivity extends BaseActivity {
         ButterKnife.inject(this);
         component = getEmailSenderApplication().component();
         component.inject(this);
+
+        presenter.setView(this);
     }
 
     @Override
@@ -76,6 +79,14 @@ public class EmailSendingActivity extends BaseActivity {
         final String subject = subjectField.getText().toString();
         final String content = contentField.getText().toString();
 
-        sender.send(senderEmail, senderPassword, recipient, subject, content);
+        presenter.handle(
+                new MessageData(
+                        senderEmail,
+                        senderPassword,
+                        ImmutableList.of(recipient),
+                        subject,
+                        content
+                )
+        );
     }
 }

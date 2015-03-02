@@ -2,6 +2,7 @@ package com.example.novy.emailsender.sending_email;
 
 import android.app.Application;
 
+import com.example.novy.emailsender.ErrorMessageHolder;
 import com.google.common.collect.ImmutableList;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -21,42 +22,32 @@ public class EmailServiceApiGateway {
 
     private Application application;
     private AsyncHttpClient httpClient;
+    private StringEntityFactory stringEntityFactory;
 
-    public EmailServiceApiGateway(Application application, AsyncHttpClient httpClient) {
+    public EmailServiceApiGateway(Application application, AsyncHttpClient httpClient, StringEntityFactory stringEntityFactory) {
         this.application = application;
         this.httpClient = httpClient;
+        this.stringEntityFactory = stringEntityFactory;
     }
 
-    public void send(String sender, String password, String recipient, String topic, String content) {
-        JSONObject jsonPayload = new JSONObject();
-        JSONArray recipients = new JSONArray(ImmutableList.of(recipient));
+    public void send(MessageData messageData, EmailSendResponseHandler handler) {
+        StringEntity entity = null;
         try {
-            jsonPayload.put("sender", sender);
-            jsonPayload.put("password", password);
-            jsonPayload.put("recipients", recipients);
-            jsonPayload.put("subject", topic);
-            jsonPayload.put("content", content);
-        } catch (JSONException e) {
+            entity = stringEntityFactory.fromMessageData(messageData);
+        } catch (JSONException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        StringEntity entity = null;
-        try {
-            entity = new StringEntity(jsonPayload.toString());
-            System.out.println(jsonPayload.toString());
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
         httpClient.post(application, "http://10.0.2.2:8080/emailservice/", entity, "application/json",
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        System.out.println("success " + statusCode);
+                        handler.onSuccess();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        System.out.println("failure " + statusCode);
+                        handler.onFailure(error);
                     }
                 }
         );
