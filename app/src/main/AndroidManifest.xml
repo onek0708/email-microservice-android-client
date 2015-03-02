@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EmailSendingActivity"
+            android:name=".sending_email.EmailSendingActivity"
             android:label="@string/title_activity_email_content"></activity>
     </application>
 

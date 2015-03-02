@@ -1,4 +1,4 @@
-package com.example.novy.emailsender;
+package com.example.novy.emailsender.sending_email;
 
 import android.app.Application;
 

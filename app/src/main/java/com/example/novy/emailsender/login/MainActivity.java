@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.example.novy.emailsender.BaseActivity;
-import com.example.novy.emailsender.EmailSendingActivity;
+import com.example.novy.emailsender.sending_email.EmailSendingActivity;
 import com.example.novy.emailsender.IntentConstants;
 import com.example.novy.emailsender.R;
 import com.example.novy.emailsender.WithDialogShowing;

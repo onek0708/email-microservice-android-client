@@ -1,6 +1,6 @@
 package com.example.novy.emailsender.infrastructure.di;
 
-import com.example.novy.emailsender.EmailSendingActivity;
+import com.example.novy.emailsender.sending_email.EmailSendingActivity;
 import com.example.novy.emailsender.EmailSenderApplication;
 import com.example.novy.emailsender.login.MainActivity;
 

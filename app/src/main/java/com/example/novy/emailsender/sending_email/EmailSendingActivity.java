@@ -1,10 +1,13 @@
-package com.example.novy.emailsender;
+package com.example.novy.emailsender.sending_email;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.example.novy.emailsender.BaseActivity;
+import com.example.novy.emailsender.IntentConstants;
+import com.example.novy.emailsender.R;
 import com.example.novy.emailsender.infrastructure.di.MainComponent;
 
 import javax.inject.Inject;

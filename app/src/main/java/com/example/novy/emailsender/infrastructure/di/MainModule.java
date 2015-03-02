@@ -2,7 +2,7 @@ package com.example.novy.emailsender.infrastructure.di;
 
 import android.app.Application;
 
-import com.example.novy.emailsender.EmailServiceApiGateway;
+import com.example.novy.emailsender.sending_email.EmailServiceApiGateway;
 import com.example.novy.emailsender.login.MainActivityPresenter;
 import com.example.novy.emailsender.login.MainActivityPresenterImpl;
 import com.loopj.android.http.AsyncHttpClient;
