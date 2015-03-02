@@ -29,6 +29,7 @@ public class EmailSendingActivityPresenterImpl implements EmailSendingActivityPr
 
     @Override
     public void handle(MessageData messageData) {
+//        todo: refactor
         if (hasInvalidRecipientAddress(messageData)) {
             activity.showErrorMessage(ErrorMessageHolder.INVALID_RECIPIENT_ADDRESS);
         } else if (hasEmptySubject(messageData)) {
