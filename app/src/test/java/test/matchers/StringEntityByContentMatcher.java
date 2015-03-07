@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class StringEntityByContentMatcher {
 
-    public static Matcher<StringEntity> equalsByContent(StringEntity thatEntity) {
+    public static Matcher<StringEntity> equalsByContent(final StringEntity thatEntity) {
         return new TypeSafeMatcher<StringEntity>() {
             @Override
             public boolean matchesSafely(StringEntity thisEntity) {

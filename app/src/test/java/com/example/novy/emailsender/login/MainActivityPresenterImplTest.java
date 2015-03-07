@@ -18,17 +18,13 @@ import static org.mockito.Mockito.verify;
 public class MainActivityPresenterImplTest {
 
     @Mock
-    private EmailValidator emailValidatorMock;
-
-    @Mock
     private MainActivity mainActivityMock;
 
     @Test
     public void shouldDisplayErrorMessageOnActivityGivenInvalidEmailAddress() throws Exception {
 
         final String invalidEmailAddress = "invalidEmailAddress";
-        given(emailValidatorMock.isValid(invalidEmailAddress)).willReturn(false);
-        final MainActivityPresenter objectUnderTest = new MainActivityPresenterImpl(emailValidatorMock, mainActivityMock);
+        final MainActivityPresenter objectUnderTest = new MainActivityPresenterImpl(mainActivityMock);
 
         objectUnderTest.handle(invalidEmailAddress, "password");
 
@@ -38,9 +34,8 @@ public class MainActivityPresenterImplTest {
     @Test
     public void shouldDisplayErrorMessageOnActivityGivenEmptyPassword() throws Exception {
 
-        final String validEmailAddress = "valid@email.address";
-        given(emailValidatorMock.isValid(validEmailAddress)).willReturn(true);
-        final MainActivityPresenter objectUnderTest = new MainActivityPresenterImpl(emailValidatorMock, mainActivityMock);
+        final String validEmailAddress = "valid@gmail.com";
+        final MainActivityPresenter objectUnderTest = new MainActivityPresenterImpl(mainActivityMock);
 
         objectUnderTest.handle(validEmailAddress, "");
 
@@ -50,10 +45,9 @@ public class MainActivityPresenterImplTest {
     @Test
     public void shouldSwitchActivityToEmailContentActivityOnValidEmailAndPassword() throws Exception {
 
-        final String validEmailAddress = "valid@email.address";
+        final String validEmailAddress = "valid@gmail.com";
         final String validPassword = "password";
-        given(emailValidatorMock.isValid(validEmailAddress)).willReturn(true);
-        final MainActivityPresenter objectUnderTest = new MainActivityPresenterImpl(emailValidatorMock, mainActivityMock);
+        final MainActivityPresenter objectUnderTest = new MainActivityPresenterImpl(mainActivityMock);
 
         objectUnderTest.handle(validEmailAddress, validPassword);
 

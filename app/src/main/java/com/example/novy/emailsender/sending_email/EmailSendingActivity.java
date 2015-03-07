@@ -9,6 +9,7 @@ import com.example.novy.emailsender.BaseActivity;
 import com.example.novy.emailsender.IntentConstants;
 import com.example.novy.emailsender.R;
 import com.example.novy.emailsender.infrastructure.di.MainComponent;
+import com.example.novy.emailsender.sending_email.model.MessageData;
 import com.google.common.collect.ImmutableList;
 
 import javax.inject.Inject;
@@ -80,13 +81,11 @@ public class EmailSendingActivity extends BaseActivity {
         final String content = contentField.getText().toString();
 
         presenter.handle(
-                new MessageData(
-                        senderEmail,
-                        senderPassword,
-                        ImmutableList.of(recipient),
-                        subject,
-                        content
-                )
+                senderEmail,
+                senderPassword,
+                ImmutableList.of(recipient),
+                subject,
+                content
         );
     }
 }

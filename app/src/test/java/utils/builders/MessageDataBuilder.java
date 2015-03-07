@@ -1,6 +1,6 @@
 package utils.builders;
 
-import com.example.novy.emailsender.sending_email.MessageData;
+import com.example.novy.emailsender.sending_email.model.MessageData;
 import com.google.common.collect.ImmutableList;
 
 import java.util.Collection;
@@ -24,6 +24,8 @@ public class MessageDataBuilder {
     private String content = "content";
 
     public MessageData build() throws Exception {
-        return new MessageData(sender, password, recipients, subject, content);
+        return MessageData.of(sender, password, recipients, subject, content)
+                .get();
+
     }
 }

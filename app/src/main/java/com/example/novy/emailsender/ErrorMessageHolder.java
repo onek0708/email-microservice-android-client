@@ -15,6 +15,8 @@ public class ErrorMessageHolder {
     public static final String SEND_SUCCESS = "Email sent.";
     public static final String SEND_FAILURE = "Unable to send an email!";
 
+    public static final String UNEXPECTED_ERROR = "Unexpected error!";
+
     private ErrorMessageHolder() {
     }
 }

@@ -39,11 +39,6 @@ public class MainModule {
     }
 
     @Provides
-    public EmailValidator provideEmailValidator() {
-        return EmailValidator.getInstance();
-    }
-
-    @Provides
     public StringEntityFactory provideStringEntityFactory() {
         return new StringEntityFactory();
     }
@@ -54,13 +49,12 @@ public class MainModule {
     }
 
     @Provides
-    public MainActivityPresenter provideMainActivityPresenter(EmailValidator validator) {
-        return new MainActivityPresenterImpl(validator);
+    public MainActivityPresenter provideMainActivityPresenter() {
+        return new MainActivityPresenterImpl();
     }
 
     @Provides
-    public EmailSendingActivityPresenter provideEmailSendingActivityPresenter(
-            EmailValidator emailValidator, EmailServiceApiGateway emailServiceApiGateway) {
-        return new EmailSendingActivityPresenterImpl(emailValidator, emailServiceApiGateway);
+    public EmailSendingActivityPresenter provideEmailSendingActivityPresenter(EmailServiceApiGateway emailServiceApiGateway) {
+        return new EmailSendingActivityPresenterImpl(emailServiceApiGateway);
     }
 }

@@ -1,7 +1,10 @@
 package com.example.novy.emailsender.login;
 
 import com.example.novy.emailsender.ErrorMessageHolder;
+import com.example.novy.emailsender.login.model.Sender;
 import com.google.common.base.Strings;
+import com.lambdista.util.FailableSupplier;
+import com.lambdista.util.Try;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -10,24 +13,32 @@ import org.apache.commons.validator.routines.EmailValidator;
  */
 public class MainActivityPresenterImpl implements MainActivityPresenter {
 
-    private final EmailValidator validator;
     private MainActivity activity;
 
-    public MainActivityPresenterImpl(EmailValidator validator) {
-        this.validator = validator;
-    }
+    public MainActivityPresenterImpl() {}
 
-    public MainActivityPresenterImpl(EmailValidator validator, MainActivity activity) {
-        this.validator = validator;
+    public MainActivityPresenterImpl(MainActivity activity) {
         this.activity = activity;
     }
 
     @Override
-    public void handle(String senderEmail, String senderEmailPassword) {
-        if (!emailValid(senderEmail)) {
-            activity.showErrorMessage(ErrorMessageHolder.INVALID_SENDER_ADDRESS);
-        } else if (passwordEmpty(senderEmailPassword)) {
-            activity.showErrorMessage(ErrorMessageHolder.EMPTY_PASSWORD);
+    public void handle(final String senderEmail, final String senderEmailPassword) {
+        final Try<Sender> senderMonad = Try.apply(
+                new FailableSupplier<Sender>() {
+                    @Override
+                    public Sender get() throws Exception {
+                        return Sender.of(senderEmail, senderEmailPassword);
+                    }
+                }
+        );
+
+        if (senderMonad.isFailure()) {
+            activity.showErrorMessage(
+                    senderMonad
+                    .failed()
+                    .get()
+                    .getMessage()
+            );
         } else {
             activity.showEmailContentActivity(senderEmail, senderEmailPassword);
         }
@@ -36,13 +47,5 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
     @Override
     public void setView(MainActivity activity) {
         this.activity = activity;
-    }
-
-    private boolean emailValid(String email) {
-        return validator.isValid(email);
-    }
-
-    private boolean passwordEmpty(String password) {
-        return Strings.isNullOrEmpty(password);
     }
 }

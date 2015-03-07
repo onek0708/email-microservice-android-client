@@ -1,9 +1,10 @@
 package com.example.novy.emailsender.sending_email;
 
+import com.example.novy.emailsender.sending_email.model.MessageData;
 import com.google.common.collect.ImmutableList;
+import com.lambdista.util.Try;
 
 import org.apache.http.entity.StringEntity;
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -11,11 +12,11 @@ import org.robolectric.annotation.Config;
 
 import java.util.Collection;
 
-import test.matchers.StringEntityByContentMatcher;
 import utils.builders.MessageDataBuilder;
 import utils.builders.StringEntityBuilder;
 
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static test.matchers.StringEntityByContentMatcher.*;
 
 @Config(manifest = Config.NONE)
@@ -50,7 +51,12 @@ public class StringEntityFactoryTest {
                 .content(content)
                 .build();
 
+        final Try<StringEntity> actualResultWrapper = objectUnderTest.fromMessageData(messageData);
 
-        assertThat(objectUnderTest.fromMessageData(messageData), equalsByContent(expectedResult));
+        assertTrue(actualResultWrapper.isSuccess());
+        assertThat(
+                objectUnderTest.fromMessageData(messageData).get(),
+                equalsByContent(expectedResult)
+        );
     }
 }

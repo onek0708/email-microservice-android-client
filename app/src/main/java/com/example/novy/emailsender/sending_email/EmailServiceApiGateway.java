@@ -2,18 +2,13 @@ package com.example.novy.emailsender.sending_email;
 
 import android.app.Application;
 
-import com.example.novy.emailsender.ErrorMessageHolder;
-import com.google.common.collect.ImmutableList;
+import com.example.novy.emailsender.sending_email.model.MessageData;
+import com.lambdista.util.Try;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 /**
  * Created by novy on 01.03.15.
@@ -30,15 +25,17 @@ public class EmailServiceApiGateway {
         this.stringEntityFactory = stringEntityFactory;
     }
 
-    public void send(MessageData messageData, EmailSendResponseHandler handler) {
-        StringEntity entity = null;
-        try {
-            entity = stringEntityFactory.fromMessageData(messageData);
-        } catch (JSONException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+    public void send(MessageData messageData, final CallbackHandler handler) {
+        final Try<StringEntity> stringEntityMonad = stringEntityFactory.fromMessageData(messageData);
+        if (stringEntityMonad.isFailure()) {
+            handler.onFailure(
+                    stringEntityMonad
+                            .failed()
+                            .get()
+            );
         }
 
-        httpClient.post(application, "http://10.0.2.2:8080/emailservice/", entity, "application/json",
+        httpClient.post(application, "http://10.0.2.2:8080/emailservice/", stringEntityMonad.getOrElse(null), "application/json",
                 new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
