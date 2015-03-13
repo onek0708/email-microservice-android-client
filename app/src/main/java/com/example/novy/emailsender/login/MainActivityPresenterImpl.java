@@ -1,12 +1,8 @@
 package com.example.novy.emailsender.login;
 
-import com.example.novy.emailsender.ErrorMessageHolder;
 import com.example.novy.emailsender.login.model.Sender;
-import com.google.common.base.Strings;
 import com.lambdista.util.FailableSupplier;
 import com.lambdista.util.Try;
-
-import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * Created by novy on 01.03.15.

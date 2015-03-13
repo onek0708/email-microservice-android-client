@@ -1,6 +1,6 @@
 package com.example.novy.emailsender.sending_email.model;
 
-import com.example.novy.emailsender.ErrorMessageHolder;
+import com.example.novy.emailsender.MessageHolder;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
@@ -19,8 +19,8 @@ public class Message {
     private final String content;
 
     private Message(String subject, String content) {
-        Preconditions.checkArgument(notEmpty(subject), ErrorMessageHolder.EMPTY_SUBJECT);
-        Preconditions.checkArgument(notEmpty(content), ErrorMessageHolder.EMPTY_CONTENT);
+        Preconditions.checkArgument(notEmpty(subject), MessageHolder.EMPTY_SUBJECT);
+        Preconditions.checkArgument(notEmpty(content), MessageHolder.EMPTY_CONTENT);
 
         this.subject = subject;
         this.content = content;

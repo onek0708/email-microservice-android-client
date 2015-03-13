@@ -1,6 +1,6 @@
 package com.example.novy.emailsender.sending_email.model;
 
-import com.example.novy.emailsender.ErrorMessageHolder;
+import com.example.novy.emailsender.MessageHolder;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -23,7 +23,7 @@ public class Recipients {
     private Collection<String> recipients = Lists.newArrayList();
 
     public Recipients(Collection<String> recipients) {
-        Preconditions.checkArgument(hasOnlyValidEmailAddresses(recipients), ErrorMessageHolder.INVALID_RECIPIENT_ADDRESS);
+        Preconditions.checkArgument(hasOnlyValidEmailAddresses(recipients), MessageHolder.INVALID_RECIPIENT_ADDRESS);
         this.recipients = new ArrayList<>(recipients);
     }
 

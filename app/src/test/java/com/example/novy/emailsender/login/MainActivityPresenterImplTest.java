@@ -1,8 +1,7 @@
 package com.example.novy.emailsender.login;
 
-import com.example.novy.emailsender.ErrorMessageHolder;
+import com.example.novy.emailsender.MessageHolder;
 
-import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -28,7 +27,7 @@ public class MainActivityPresenterImplTest {
 
         objectUnderTest.handle(invalidEmailAddress, "password");
 
-        verify(mainActivityMock, times(1)).showErrorMessage(ErrorMessageHolder.INVALID_SENDER_ADDRESS);
+        verify(mainActivityMock, times(1)).showErrorMessage(MessageHolder.INVALID_SENDER_ADDRESS);
     }
 
     @Test
@@ -39,7 +38,7 @@ public class MainActivityPresenterImplTest {
 
         objectUnderTest.handle(validEmailAddress, "");
 
-        verify(mainActivityMock, times(1)).showErrorMessage(ErrorMessageHolder.EMPTY_PASSWORD);
+        verify(mainActivityMock, times(1)).showErrorMessage(MessageHolder.EMPTY_PASSWORD);
     }
 
     @Test

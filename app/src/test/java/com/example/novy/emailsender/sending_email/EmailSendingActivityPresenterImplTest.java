@@ -1,10 +1,8 @@
 package com.example.novy.emailsender.sending_email;
 
-import com.example.novy.emailsender.ErrorMessageHolder;
-import com.example.novy.emailsender.sending_email.model.MessageData;
+import com.example.novy.emailsender.MessageHolder;
 import com.google.common.collect.ImmutableList;
 
-import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,7 +39,7 @@ public class EmailSendingActivityPresenterImplTest {
                 "content"
         );
 
-        verify(activityMock, times(1)).showErrorMessage(ErrorMessageHolder.INVALID_RECIPIENT_ADDRESS);
+        verify(activityMock, times(1)).showErrorMessage(MessageHolder.INVALID_RECIPIENT_ADDRESS);
     }
 
     @Test
@@ -58,7 +56,7 @@ public class EmailSendingActivityPresenterImplTest {
                 "content"
         );
 
-        verify(activityMock, times(1)).showErrorMessage(ErrorMessageHolder.EMPTY_SUBJECT);
+        verify(activityMock, times(1)).showErrorMessage(MessageHolder.EMPTY_SUBJECT);
     }
 
     @Test
@@ -75,6 +73,6 @@ public class EmailSendingActivityPresenterImplTest {
                 ""
         );
 
-        verify(activityMock, times(1)).showErrorMessage(ErrorMessageHolder.EMPTY_CONTENT);
+        verify(activityMock, times(1)).showErrorMessage(MessageHolder.EMPTY_CONTENT);
     }
 }

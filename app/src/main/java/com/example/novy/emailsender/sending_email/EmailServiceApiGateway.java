@@ -33,6 +33,7 @@ public class EmailServiceApiGateway {
                             .failed()
                             .get()
             );
+            return;
         }
 
         httpClient.post(application, "http://10.0.2.2:8080/emailservice/", stringEntityMonad.getOrElse(null), "application/json",

@@ -1,6 +1,6 @@
 package com.example.novy.emailsender.login.model;
 
-import com.example.novy.emailsender.ErrorMessageHolder;
+import com.example.novy.emailsender.MessageHolder;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
@@ -23,8 +23,8 @@ public class Sender {
     private final String senderPassword;
 
     private Sender(String senderEmail, String senderPassword) {
-        Preconditions.checkArgument(emailStringValid(senderEmail), ErrorMessageHolder.INVALID_SENDER_ADDRESS);
-        Preconditions.checkArgument(passwordNotEmpty(senderPassword), ErrorMessageHolder.EMPTY_PASSWORD);
+        Preconditions.checkArgument(emailStringValid(senderEmail), MessageHolder.INVALID_SENDER_ADDRESS);
+        Preconditions.checkArgument(passwordNotEmpty(senderPassword), MessageHolder.EMPTY_PASSWORD);
 
         this.senderEmail = senderEmail;
         this.senderPassword = senderPassword;
